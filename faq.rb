@@ -45,4 +45,6 @@ open(target, "wb") do |file|
 end
 puts "done!"
 
-# `pandoc -s output/faq.md -o output/faq.rtf`
+print "Generating final RTF to output/faq.rtf..."
+`pandoc -s output/faq.md -o output/faq.rtf`
+puts "done!"
