@@ -31,7 +31,7 @@ open(target, "wb") do |file|
   header = "mCloud Frequently Asked Questions"
   file.write "#{header}\n"
   file.write "=" * header.length
-  file.write "\nDate generated: #{Time.now.inspect}"
+  file.write "\n_Date generated: #{Time.now.inspect}_"
   file.write "\n"
   categories.each do |category|
     file.write "\n## #{category['name']} ##\n"
