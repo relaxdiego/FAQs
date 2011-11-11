@@ -1,0 +1,3 @@
+host: "your.redmine.host"
+api_key: "Copy your API access key (found in your account page) and past that here"
+project_id: "The unique ID of the project to get the faqs"
