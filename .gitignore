@@ -1,2 +1,7 @@
 .DS_Store
 config.yml
+output/assets/*.html
+output/assets/*.css
+output/assets/*.js
+output/assets/*.png
+output/*.html

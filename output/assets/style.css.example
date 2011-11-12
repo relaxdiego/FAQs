@@ -1,0 +1,5 @@
+body {
+  background-color: #CCCCCC;
+  font-family: Helvetica, sans-serif;
+  line-height: 1.3;
+}
