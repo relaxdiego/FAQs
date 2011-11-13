@@ -33,8 +33,8 @@ open(raw, "wb") do |file|
     filtered_faq = faq.select{ |q| q['category']['id']==category['id'] }
     filtered_faq.each do |q|
       file.write "\n\nh3. #{q['subject']}"
-      file.write "\n\n<div class=\"faq-id\">ID: #{q['id']}</div>"
       file.write "\n\n<div class=\"answer\">#{q['description']}\n\n</div>"
+      file.write "\n\n<div class=\"faq-id\">ID: #{q['id']}</div>"
     end
   end
 end
