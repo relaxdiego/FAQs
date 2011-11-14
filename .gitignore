@@ -8,3 +8,4 @@ output/*.html
 fragments/*.html
 fragments/*.css
 fragments/*.js
+latest.tar.gz
