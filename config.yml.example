@@ -1,3 +1,5 @@
-host: "your.redmine.host"
-api_key: "Copy your API access key (found in your account page) and past that here"
-project_id: "The unique ID of the project to get the faqs"
+redmine_host: "your.redmine.host"
+redmine_api_key: "Copy your API access key (found in your account page) and past that here"
+redmine_project_id: "The unique ID of the project to get the faqs"
+box_api_key: 'get yours at http://www.box.net/developers/services'
+box_folder_id: 'get this from the folder's url'

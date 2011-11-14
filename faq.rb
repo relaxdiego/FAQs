@@ -1,18 +1,21 @@
 # 1) Make sure pandoc is installed in your system http://johnmacfarlane.net/pandoc
 # 2) Make sure the JSON gem is installed in your system `gem install json_pure`
 # 3) Make sure you have a config.yml file setup alongside this script. See config.yml.example for an example
+# 4) Make sure you have the box-api gem installed
 require 'rubygems'
 require 'net/http'
 require 'json/pure'
 require 'yaml'
+require 'box-api'
+require 'launchy'
 
 config = YAML::load( File.open('config.yml') )
 
 faq = {}
 
 print 'Retrieving faqs...'
-Net::HTTP.start(config['host']) { |http|
-  response = http.get("/projects/#{config['project_id']}/issues.json?&limit=100&status_id=closed&key=#{config['api_key']}")
+Net::HTTP.start(config['redmine_host']) { |http|
+  response = http.get("/projects/#{config['redmine_project_id']}/issues.json?&limit=100&status_id=closed&key=#{config['redmine_api_key']}")
   json = JSON.parse(response.body)
   faq = json['issues']
   puts "retrieved #{faq.count}/#{json['total_count']}"
@@ -48,4 +51,34 @@ puts "done!"
 
 print "Compressing output to latest.tar.gz..."
 `tar czvf latest.tar.gz output/`
+puts "done!"
+
+# This part is copied from the box-api gem's examples
+
+puts "Authenticating with Box.net..."
+account = Box::Account.new(config['box_api_key'])
+auth_token = config['box_auth_token']
+
+account.authorize(:auth_token => auth_token) do |auth_url|
+  Launchy.open(auth_url)
+  puts "Press ENTER once you have authorized this application to use your account"
+  gets
+end
+
+unless account.authorized?
+  puts "Unable to login, please try again."
+  exit
+end
+
+puts "Logged in to Box.net as #{ account.login }"
+
+config['box_auth_token'] = account.auth_token
+
+File.open('config.yml', 'w') do |file|
+  YAML.dump(config, file)
+end
+
+print "Uploading latest.tar.gz..."
+folder = account.folder(config['box_folder_id'])
+folder.upload('latest.tar.gz')
 puts "done!"
