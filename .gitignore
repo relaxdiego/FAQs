@@ -5,7 +5,10 @@ output/assets/*.css
 output/assets/*.js
 output/assets/*.png
 output/*.html
+output/*.tar.gz
 fragments/*.html
 fragments/*.css
 fragments/*.js
 latest.tar.gz
+*.tar.gz
+tmp/*.textile

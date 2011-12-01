@@ -1,7 +1,0 @@
-<div id="content">
-  <div id="header">
-    Header
-    <div id="timestamp">#{timestamp}</div>
-  </div>
-
-  <div class="header">Table of Contents</div>
